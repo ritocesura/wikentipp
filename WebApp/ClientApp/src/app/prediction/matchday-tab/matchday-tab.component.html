@@ -1,0 +1,46 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submit()">
+  <nz-table #basicTable [nzData]="['']" [nzShowPagination]="false">
+    <tbody formArrayName="matches">
+      <tr *ngFor="let matchForm of matches.controls; let i = index" [formGroupName]="i">
+        <td>{{matchForm.value.matchTimestamp | date:'dd.MM.yyyy HH:mm'}}</td>
+        <td [nzAlign]="'right'">
+          <div nz-space>
+            <span *nzSpaceItem nzJustify="space-around">{{matchForm.value.homeTeamName}}</span>
+            <img nz-image
+                 *nzSpaceItem
+                 width="35px"
+                 src="/assets/flags/4x3/{{matchForm.value.homeTeamIcon}}" />
+          </div>
+        </td>
+        <td style="width: 90px">
+          <div nz-space>
+            <nz-input-number *nzSpaceItem
+                             [nzDisabled]="matchForm.value.disabled"
+                             [nzMin]="0"
+                             [nzMax]="99"
+                             [nzStep]="1"
+                             formControlName="homeScoreTipp"></nz-input-number>
+            <span *nzSpaceItem>:</span>
+            <nz-input-number *nzSpaceItem
+                             [nzDisabled]="matchForm.value.disabled"
+                             [nzMin]="0"
+                             [nzMax]="99"
+                             [nzStep]="1"
+                             formControlName="awayScoreTipp"></nz-input-number>
+          </div>
+        </td>
+        <td>
+          <div nz-space>
+            <img nz-image
+                 *nzSpaceItem
+                 width="35px"
+                 src="/assets/flags/4x3/{{matchForm.value.awayTeamIcon}}" />
+            <span *nzSpaceItem nzJustify="space-around">{{matchForm.value.awayTeamName}}</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-divider></nz-divider>
+  <button nz-button [nzType]="'primary'" [disabled]="!form.valid || !form.dirty" [nzLoading]="isLoading">Tipps speichern</button>
+</form>

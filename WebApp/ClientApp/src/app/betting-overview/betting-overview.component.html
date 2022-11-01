@@ -1,0 +1,70 @@
+<ng-container>
+  <nz-page-header nzTitle="Tippübersicht">
+    <nz-page-header-extra>
+      <nz-input-group nzAddOnBefore="Spieltag" *ngIf="matchdays">
+        <nz-select [(ngModel)]="selectedMatchday">
+          <nz-option *ngFor="let matchday of matchdays" [nzLabel]="matchday.name" [nzValue]="matchday.name"></nz-option>
+        </nz-select>
+      </nz-input-group>
+    </nz-page-header-extra>
+  </nz-page-header>
+  
+  <ng-container *ngIf="matchdays && overview">
+    <nz-table #tasksTable nzSize="middle" [nzData]="['']" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Benutzer</th>
+          <ng-container *ngFor="let match of overview.header">
+            <th *ngIf="match.matchday == selectedMatchday" nzAlign="center">
+              <div nz-space>
+                <div *nzSpaceItem>
+                  <img nz-image
+                       width="35px"
+                       src="/assets/flags/4x3/{{match.homeTeamIcon}}" />
+                  <div nzJustify="space-around"><b>{{match.homeTeamShortName}}</b></div>
+                </div>
+                <div *nzSpaceItem>
+                  <span *ngIf="match.homeScore != null; else minus">{{match.homeScore}}</span> : <span *ngIf="match.awayScore != null; else minus">{{match.awayScore}}</span>
+                  <ng-template #minus>-</ng-template>
+                </div>
+                <div *nzSpaceItem class="center">
+                  <img nz-image
+                       width="35px"
+                       src="/assets/flags/4x3/{{match.awayTeamIcon}}" />
+                  <div><b>{{match.awayTeamShortName}}</b></div>
+                </div>
+              </div>
+            </th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of overview.content; index as i" [class.my-user]="user.isMyUser === true" [class.ai-user]="user.isAi === true">
+          <td nzAlign="center">
+            <b>{{i+1}}</b>
+          </td>
+          <td>
+            <div nz-space nzAlign="center" class="space-align-block">
+              <nz-avatar *nzSpaceItem nzIcon="user" [nzSize]="64" nzSrc="/assets/cats/{{user.userIcon}}"></nz-avatar>
+              <ng-container *nzSpaceItem>
+                <div><i>{{user.userName}}</i></div>
+                <div><b>{{user.totalPoints}}</b></div>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngFor="let match of user.matches">
+            <td *ngIf="match.matchday == selectedMatchday" nzAlign="center">
+              <nz-badge [nzCount]="match.points" class="score">
+                <nz-tag nzColor="default">
+                  <span *ngIf="match.homeScoreTipp != null; else minus">{{match.homeScoreTipp}}</span> : <span *ngIf="match.awayScoreTipp != null; else minus">{{match.awayScoreTipp}}</span>
+                  <ng-template #minus>-</ng-template>
+                </nz-tag>
+              </nz-badge>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</ng-container>

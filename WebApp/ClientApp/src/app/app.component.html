@@ -1,0 +1,93 @@
+<nz-layout class="app-layout">
+  <nz-sider [nzWidth]="300">
+    <div class="sidebar-logo">
+      <img src="./assets/20220917_wikentipp.png" style="width: 300px" alt="logo">
+    </div>
+    <div class="sidebar-container">
+      <div class="main-navbar">
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+          <a nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="home">
+            <i nz-icon nzType="home" nzTheme="outline"></i>
+            <span>Spielregeln</span>
+          </a>
+          <li nz-submenu nzTitle="WM Tipp" nzIcon="appstore" nzOpen *ngIf="(isAuthenticated$ | async) === true">
+            <ul>
+              <li>
+                <a nz-menu-item nzMatchRouter routerLink="/overview" [nzPaddingLeft]="32">
+                  <!--<i nz-icon nzType="heat-map" nzTheme="outline"></i>-->
+                  <span>Gesamtübersicht</span>
+                </a> 
+              </li>
+              <li>
+                <a nz-menu-item nzMatchRouter routerLink="/bettingOverview" [nzPaddingLeft]="32">
+                  <!--<i nz-icon nzType="radar-chart" nzTheme="outline"></i>-->
+                  <span>Tippübersicht</span>
+                </a>
+              </li>
+              <li *ngIf="(isAuthenticated$ | async) === true && (user$ | async)?.role === 'Tippexperte'">
+                <a nz-menu-item nzMatchRouter routerLink="/prediction" [nzPaddingLeft]="32">
+                  <!--<i nz-icon nzType="field-time" nzTheme="outline"></i>-->
+                  <span>Tippabgabe</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="Adminbereich" nzIcon="setting" nzOpen *ngIf="(isAuthenticated$ | async) === true && (user$ | async)?.role === 'Admin'">
+            <ul>
+              <li>
+                <a nz-menu-item nzMatchRouter routerLink="/results" [nzPaddingLeft]="32">
+                  <i nz-icon nzType="user-switch" nzTheme="outline"></i>
+                  <span>Ergebnisse</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-navbar">
+        <div class="github-menu-entry">
+          <a href="https://github.com/ritocesura/wikentipp" target="_blank">
+            <span nz-icon nzType="github" nzTheme="outline" class="icon"></span>
+            <span>Github</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="user-menu" nz-dropdown [nzDropdownMenu]="menu"
+           nzOverlayClassName="user-menu">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+          <ng-container *ngIf="(isAuthenticated$ | async) === false">Anonymous</ng-container>
+          <ng-container *ngIf="user$ | async as user">{{user.username}}</ng-container>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <ng-container *ngIf="(isAuthenticated$ | async) === false">
+                <li nz-menu-item class="menu-item" (click)="signIn()">
+                  <i nz-icon nzType="login" nzTheme="outline"></i>
+                  Sign in
+                </li>
+                <li nz-menu-item class="menu-item" (click)="register()">
+                  <i nz-icon nzType="form" nzTheme="outline"></i>
+                  Register
+                </li>
+              </ng-container>
+              <ng-container *ngIf="(isAuthenticated$ | async) === true">
+                <li nz-menu-item nzDanger (click)="logout()" class="menu-item">
+                  <i nz-icon nzType="logout" nzTheme="outline"></i>
+                  Log out
+                </li>
+              </ng-container>
+            </ul>
+          </nz-dropdown-menu>
+
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

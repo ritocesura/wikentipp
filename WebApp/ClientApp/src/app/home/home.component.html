@@ -1,0 +1,84 @@
+<nz-page-header nzTitle="Spielregeln">
+</nz-page-header>
+
+<nz-card nzType="inner" nzTitle="Sichtbarkeit">
+  <span>Die Tipps der anderen Tippexperten sind erst nach Start der Begegnung sichtbar.</span>
+</nz-card>
+<nz-card nzType="inner" nzTitle="Tippmodus">
+  <span>Es wird das <b>genaue Ergebnis</b> getippt.</span><br />
+  <span>Es wird das Ergebnis <b>nach dem Elfmeterschießen</b> getippt.</span>
+</nz-card>
+<nz-card nzType="inner" nzTitle="Tippabgaberegel">
+  <span>Die Tippzeit endet 0 Minuten vor geplantem Anpfiff der Begegnung.</span>
+</nz-card>
+<nz-card nzType="inner" nzTitle="Punkteregel">
+  <nz-space [nzSize]="'large'" [nzAlign]="'start'">
+    <nz-table *nzSpaceItem [nzData]="['']" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Tendenz</th>
+          <th>Tordifferenz</th>
+          <th>Ergebnis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Sieg</b></td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td><b>Unentschieden</b></td>
+          <td>2</td>
+          <td>-</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <nz-table *nzSpaceItem [nzData]="['']" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th><b>BEISPIELE</b></th>
+          <th>Tipp</th>
+          <th>Ergebnis</th>
+          <th>Punkte</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>2:1</td>
+          <td>2:1</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>99:0</td>
+          <td>2:1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>1:0</td>
+          <td>2:1</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>99:99</td>
+          <td>0:0</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>99:99</td>
+          <td>99:99</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-space>
+
+</nz-card>

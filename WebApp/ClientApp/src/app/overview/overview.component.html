@@ -1,0 +1,37 @@
+<ng-container>
+  <nz-page-header nzTitle="Gesamtübersicht">
+  </nz-page-header>
+  
+  <ng-container *ngIf="overview">
+    <nz-table #tasksTable nzSize="middle" [nzData]="['']" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Benutzer</th>
+          <th *ngFor="let match of overview.header">
+            {{match.name}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of overview.content; index as i" [class.my-user]="user.isMyUser === true" [class.ai-user]="user.isAi === true">
+          <td nzAlign="center">
+            <b>{{i+1}}</b>
+          </td>
+          <td>
+            <div nz-space nzAlign="center" class="space-align-block">
+              <nz-avatar *nzSpaceItem nzIcon="user" [nzSize]="64" nzSrc="/assets/cats/{{user.userIcon}}"></nz-avatar>
+              <ng-container *nzSpaceItem>
+                <div><i>{{user.userName}}</i></div>
+                <div><b>{{user.totalPoints}}</b></div>
+              </ng-container>
+            </div>
+          </td>
+          <td *ngFor="let matchday of user.pointList">
+            <span [class.bold]="matchday.points > 0">{{matchday.points}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</ng-container>

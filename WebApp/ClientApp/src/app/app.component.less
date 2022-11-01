@@ -1,0 +1,104 @@
+::ng-deep .user-menu {
+  .menu-item {
+    padding: 10px;
+
+    > i {
+      margin-right: 10px;
+    }
+  }
+}
+
+nz-header {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 10px;
+  width: 100%;
+  z-index: 2;
+
+  .region-selector {
+    min-width: 300px;
+  }
+
+  .user-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px;
+    background-color: rgba(0, 45, 82, 0.5);
+    margin-left: auto;
+
+    > i {
+      margin-right: 5px;
+    }
+
+    &.anonymous {
+      background-color: rgba(231, 99, 99, 0.5);
+    }
+  }
+}
+
+nz-content {
+  overflow-y: auto;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #333;
+  min-height: 100%;
+}
+
+.app-layout {
+  height: 100vh;
+}
+
+a {
+    text-decoration:none;
+}
+
+.github-menu-entry {
+  background-color: black;
+}
+
+.bottom-navbar {
+  transition: all .2s;
+
+  > div {
+    transition: all .2s;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+
+    &.collapsed {
+      justify-content: center;
+      padding: 0;
+
+      > a > span {
+        display: inline-block;
+        position: absolute;
+        opacity: 0;
+      }
+    }
+
+    > a {
+      transition: all .2s;
+      color: white;
+      text-decoration: none;
+
+      > span {
+        transition: all .2s;
+      }
+    }
+
+
+    .icon {
+      width: 40px;
+      padding: 8px;
+    }
+  }
+
+  .github-menu-entry {
+    background-color: black;
+  }
+
+}

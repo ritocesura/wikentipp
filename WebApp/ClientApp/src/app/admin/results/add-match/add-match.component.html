@@ -1,0 +1,43 @@
+<div>
+  <form nz-form [formGroup]="form">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>Spieltag</nz-form-label>
+      <nz-form-control nzErrorTip="Required">
+        <nz-select formControlName="matchdayId">
+          <nz-option *ngFor="let matchday of matchdays" [nzLabel]="matchday.name" [nzValue]="matchday.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>Home Team</nz-form-label>
+      <nz-form-control nzErrorTip="Required">
+        <nz-select formControlName="homeTeamId">
+          <nz-option *ngFor="let team of teams" [nzLabel]="team.name" [nzValue]="team.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>Away Team</nz-form-label>
+      <nz-form-control nzErrorTip="Required">
+        <nz-select formControlName="awayTeamId">
+          <nz-option *ngFor="let team of teams" [nzLabel]="team.name" [nzValue]="team.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired>Match Start</nz-form-label>
+      <nz-form-control nzErrorTip="Required">
+        <nz-date-picker formControlName="matchTimestamp"
+                        nzShowTime
+                        nzFormat="yyyyMM.dd HH:mm"
+                        ></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
+    <button nz-button nzType="primary" (click)="submit()" [disabled]="!form.valid">Submit</button>
+  </form>
+</div>

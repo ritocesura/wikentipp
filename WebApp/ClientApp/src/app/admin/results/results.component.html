@@ -1,0 +1,71 @@
+<ng-container>
+  <nz-page-header nzTitle="Matches">
+    <nz-page-header-extra>
+      <button nz-button nzType="primary" (click)="open()">New Match</button>
+    </nz-page-header-extra>
+  </nz-page-header>
+  <nz-divider></nz-divider>
+  <form nz-form [formGroup]="form" (ngSubmit)="submit()" *ngIf="matches">
+    <nz-table #tasksTable nzSize="middle" [nzData]="['']" [nzShowPagination]="false">
+      <tbody formArrayName="matches">
+        <tr *ngFor="let matchForm of matches.controls; let i = index" [formGroupName]="i">
+          <td>
+            {{matchForm.value.matchTimestamp | date:'dd.MM.yyyy HH:mm'}}
+          </td>
+          <td>
+            <ng-container *ngIf="matchForm.value.group != null">Gruppe {{matchForm.value.group}}</ng-container>
+          </td>
+          <td>
+            {{matchForm.value.matchdayName}}
+          </td>
+          <td [nzAlign]="'right'">
+            <div nz-space>
+              <span *nzSpaceItem nzJustify="space-around">{{matchForm.value.homeTeamName}}</span>
+              <img nz-image
+                   *nzSpaceItem
+                   width="35px"
+                   src="/assets/flags/4x3/{{matchForm.value.homeTeamIcon}}" />
+            </div>
+          </td>
+          <td style="width: 90px">
+            <div nz-space>
+              <nz-input-number *nzSpaceItem
+                               [nzMin]="0"
+                               [nzMax]="99"
+                               [nzStep]="1"
+                               formControlName="homeScore"></nz-input-number>
+              <span *nzSpaceItem>:</span>
+              <nz-input-number *nzSpaceItem
+                               [nzMin]="0"
+                               [nzMax]="99"
+                               [nzStep]="1"
+                               formControlName="awayScore"></nz-input-number>
+            </div>
+          </td>
+          <td>
+            <div nz-space>
+              <img nz-image
+                   *nzSpaceItem
+                   width="35px"
+                   src="/assets/flags/4x3/{{matchForm.value.awayTeamIcon}}" />
+              <span *nzSpaceItem nzJustify="space-around">{{matchForm.value.awayTeamName}}</span>
+            </div>
+          </td>
+          <td>
+            <button
+                    nz-button
+                    [nzType]="'default'"
+                    nzDanger
+                    type="button"
+                    nz-popconfirm
+                    nzPopconfirmTitle="Wirklich löschen?"
+                    nzPopconfirmPlacement="top"
+                    (nzOnConfirm)="delete(i)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <nz-divider></nz-divider>
+    <button nz-button [nzType]="'primary'" [disabled]="!form.valid || !form.dirty" [nzLoading]="isLoading">Speichern</button>
+  </form>
+</ng-container>

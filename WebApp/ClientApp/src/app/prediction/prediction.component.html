@@ -1,0 +1,16 @@
+<ng-container>
+  <nz-page-header nzTitle="Tippabgabe">
+  </nz-page-header>
+
+  <ng-container *ngIf="matchdays">
+    <nz-tabset [nzSelectedIndex]="tabIndex">
+      <ng-container *ngFor="let matchday of matchdays; let i = index">
+        <nz-tab nzTitle="{{matchday.name}}">
+          <ng-template nz-tab>
+            <matchday-tab [index]="i+1"></matchday-tab>
+          </ng-template>
+        </nz-tab>
+      </ng-container>
+    </nz-tabset>
+  </ng-container>
+</ng-container>
