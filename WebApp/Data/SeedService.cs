@@ -28,7 +28,7 @@ namespace Wm22App.Data
                 new Team() { Id = 18, Name = "Kroatien", Icon="hr.svg" },
                 new Team() { Id = 19, Name = "Marokko", Icon="ma.svg" },
                 new Team() { Id = 20, Name = "Mexiko", Icon="mx.svg" },
-                new Team() { Id = 21, Name = "Niderlande", Icon="nl.svg" },
+                new Team() { Id = 21, Name = "Niederlande", Icon="nl.svg" },
                 new Team() { Id = 22, Name = "Polen", Icon="pl.svg" },
                 new Team() { Id = 23, Name = "Portugal", Icon="pt.svg" },
                 new Team() { Id = 24, Name = "Saudi-Arabien", Icon="sa.svg" },
